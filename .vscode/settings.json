@@ -1,0 +1,24 @@
+{
+    "mesonbuild.configureOnOpen": false,
+    "codechecker.backend.compilationDatabasePath": "h:\\Egyetem\\Msc\\sandbox\\builddir\\compile_commands.json",
+    "C_Cpp.default.compileCommands": "builddir\\vscode_compile_commands.json",
+    "files.associations": {
+        "st7789.h": "c",
+        "stm32h7xx_hal.h": "c",
+        "stm32h7xx_hal_conf.h": "c",
+        "stm32h7xx_ll_dma.h": "c",
+        "mpu6050_registermap.h": "c",
+        "stm32h7xx_hal_def.h": "c",
+        "stm32h7xx_hal_i2c.h": "c",
+        "stm32h7xx.h": "c",
+        "stm32h753xx.h": "c",
+        "main.h": "c",
+        "mpu6050_driver.c_mock.h": "c",
+        "mpu6050_driver.c_mock_internal.h": "c",
+        "mpu6050_driver.h": "c",
+        "i2c_abstraction.h": "c",
+        "complementary_filter.c_mock.h": "c",
+        "complementary_filter.c_mock_internal.h": "c",
+        "complementary_filter.h": "c"
+    }
+}

@@ -1,0 +1,54 @@
+# This file is part of the Meson build system.
+# For cross-compilation, you need to specify the compiler and linker
+# commands for the target machine. You can also specify the target
+# machine's CPU family and endianness.
+# A full list of options is available at:
+# http://mesonbuild.com/Cross-compilation.html
+
+[binaries]
+c       = 'arm-none-eabi-gcc' # C compiler for the host machine
+cpp     = 'arm-none-eabi-g++' # C++ compiler for the host machine
+ld      = 'arm-none-eabi-ld' # Linker for the host machine
+ar      = 'arm-none-eabi-ar' # Archiver for the host machine
+as      = 'arm-none-eabi-as' # ...
+size    = 'arm-none-eabi-size' # ...
+objdump = 'arm-none-eabi-objdump' # ...
+objcopy = 'arm-none-eabi-objcopy' # ...
+strip   = 'arm-none-eabi-strip' # ...
+gdb     = 'arm-none-eabi-gdb' # ...
+[built-in options]
+c_args      =   [
+    # Add compiler arguments here needed for compiling C code for the target machine.
+    # For example you can add -mcpu=cortex-m4 to compile for Cortex-M4 MCUs.
+    '-mcpu=cortex-m7', 
+    '-mfpu=fpv5-d16',
+    '-mfloat-abi=hard',
+    '-mthumb',
+    '-Wall',
+    '-Wextra',
+    '-fdata-sections',
+    '-ffunction-sections'
+                ]
+c_link_args =   [
+    # Add linker arguments here needed for linking C code for the target machine.
+    # For example you can add -mfloat-abi=hard to tell the linker to use the hard-float ABI.
+    '-mcpu=cortex-m7', 
+    '-mfpu=fpv5-d16',
+    '-mfloat-abi=hard',
+    '-mthumb',
+    '-lc',
+    '-lm',
+    '-lnosys',
+    '-specs=nano.specs',
+    '-Wl,--gc-sections',
+    '-Wl,--no-warn-rwx-segment',
+    '-Wl,-Map=map.map',
+    '-u',
+    '_printf_float'
+                ]
+# Description of the host machine            
+[host_machine]
+system = 'none'
+cpu_family = 'arm'
+cpu = 'cortex-m4'
+endian = 'little'
