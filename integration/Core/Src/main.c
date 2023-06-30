@@ -52,8 +52,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-MAP_TO_DTCM_RAM_D1_BSS uint8_t display_buffer0[115200];
-MAP_TO_DTCM_RAM_D2_BSS uint8_t display_buffer1[115200];
+
+MAP_TO_RAM_D1_BSS uint8_t display_buffer0[115200];
+MAP_TO_RAM_D2_BSS uint8_t display_buffer1[115200];
+
 uint8_t *display = display_buffer0;
 uint8_t *display_next = display_buffer1;
 _ST7789_Refresh_State ST7789_Refresh_State;
