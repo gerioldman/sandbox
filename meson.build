@@ -7,7 +7,8 @@ project(
     meson_version: '>= 1.0.0',
     default_options:[
         'c_std=gnu11',
-        'buildtype=debug'
+        'buildtype=debugoptimized',
+        'b_coverage=true'
     ]
 )
 
@@ -72,7 +73,7 @@ codechecker = find_program('CodeChecker')
 
 run_target(
     'static_analysis',
-    command: [codechecker, 'analyze', 'compile_commands.json' , '-o', '..\\reports']
+    command: [codechecker, 'analyze', 'compile_commands.json' , '-o', '..\\.codechecker','--skip','..\\codechecker.cfg']
 )
 
 if get_option('target_executable') == true
@@ -97,7 +98,10 @@ ELF = executable(meson.project_name(),
         '-DPLATFORM=1', 
         '-DUNITTEST=0'
     ],
-    link_args: [ link_args ]
+    link_args: [ link_args ],
+    override_options: [
+        'b_coverage=false'
+    ]
 )
 
 objcopy = find_program('objcopy')

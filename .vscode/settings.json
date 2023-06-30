@@ -1,6 +1,5 @@
 {
-    "mesonbuild.configureOnOpen": false,
-    "codechecker.backend.compilationDatabasePath": "h:\\Egyetem\\Msc\\sandbox\\builddir\\compile_commands.json",
+    "codechecker.backend.compilationDatabasePath": "${workspaceFolder}\\builddir\\compile_commands.json",
     "C_Cpp.default.compileCommands": "builddir\\vscode_compile_commands.json",
     "files.associations": {
         "st7789.h": "c",
@@ -20,5 +19,6 @@
         "complementary_filter.c_mock.h": "c",
         "complementary_filter.c_mock_internal.h": "c",
         "complementary_filter.h": "c"
-    }
+    },
+    "mesonbuild.configureOnOpen": false
 }
