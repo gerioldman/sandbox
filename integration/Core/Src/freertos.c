@@ -222,8 +222,8 @@ void MPU6050OsTaskFunc(void *argument)
 {
   /* USER CODE BEGIN MPU6050OsTaskFunc */
   (void)argument;
+  MPU6050_Init(0);
   Complementary_Filter_InitFilter();
-  MPU6050_Init();
   /* Infinite loop */
   for (;;)
   {
