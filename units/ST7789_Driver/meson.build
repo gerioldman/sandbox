@@ -22,6 +22,7 @@ preprocessed_file = cc.preprocess(
         ],
         compile_args: [
                 stub_args,
+                platform_cflags,
                 '-DPLATFORM=0',
                 '-DUNIT_TEST=1',
                 '-nostdinc'
@@ -62,7 +63,7 @@ test(
                         unittest_include,
                         include_directories('UnitTest/include')
                 ],
-                c_args: ['-DPLATFORM=0', '-DUNIT_TEST=1', '-g'],
+                c_args: [platform_cflags, '-DPLATFORM=0', '-DUNIT_TEST=1', '-g'],
                 native: true
         ),
         protocol: 'tap',

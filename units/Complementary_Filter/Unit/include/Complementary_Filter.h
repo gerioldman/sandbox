@@ -20,7 +20,7 @@ typedef struct
 
 /* Defines -------------------------------------------------------------------*/
 
-#define COMP_FILT_ALPHA 0.1f
+#define COMP_FILT_ALPHA 0.03f
 #define DATA_FREQUENCY 100.0f
 
 /* Global variables ----------------------------------------------------------*/

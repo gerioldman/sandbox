@@ -9,6 +9,7 @@
 #define INC_GRAPHICS_H_
 
 #include <stdint.h>
+#include "Complementary_Filter.h"
 
 //
 typedef struct vector3d {
@@ -47,7 +48,7 @@ extern cube_mesh cube;
 
 void Graphics_Init();
 void MultiplyMatrixVector(vector3d *i,vector3d *o, mat4x4 *m);
-void Graphics_Draw();
+void Graphics_Draw(Orientation_Data_t orientation_data);
 void Graphics_DrawLine(int x0,int y0, int x1,int y1,uint16_t colour);
 void Graphics_Draw_Triangle(int x0,int x1,int x2,int y0,int y1,int y2,uint16_t colour);
 void Graphics_Draw_FilledTriangle(int x0,int x1,int x2,int y0,int y1, int y2,uint16_t colour);

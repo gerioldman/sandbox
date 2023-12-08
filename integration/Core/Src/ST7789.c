@@ -253,7 +253,7 @@ void ST7789_Init()
 
 	for (int i = 0; i < 230400; i++)
 	{
-		ST7789_WriteSmallData(0x00);
+		ST7789_WriteSmallData(0xFF);
 	}
 
 	ST7789_Refresh_State = ST7789_DMA_Ready;

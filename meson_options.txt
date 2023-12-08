@@ -1,7 +1,7 @@
 option(
     'target_tests', 
     type: 'boolean', 
-    value: false, 
+    value: true, 
     description: 'Switch to enable/disable building and running of tests for the target'
 )
 option(

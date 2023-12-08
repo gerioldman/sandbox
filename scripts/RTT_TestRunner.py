@@ -10,7 +10,6 @@ from pyocd.utility.cmdline import convert_session_options, int_base_0
 from pyocd.utility.kbhit import KBHit
 from ctypes import Structure, c_char, c_int32, c_uint32, sizeof
 from pyocd.core.target import Target
-from elfwrapper.elf_wrapper import ElfAddrObj
 
 import sys
 import logging
@@ -73,13 +72,15 @@ def main():
         for region in memory_map.iter_matching_regions():
             if region.type == MemoryType.RAM:
                 target.write_memory_block8(region.start, bytearray(region.length))
+                break
         
         # Program the test binary.
         programmer = FileProgrammer(session)
-        programmer.program(sys.argv[1], base_address=flash.start)
+        programmer.program(sys.argv[1], base_address=flash.start, skip=0, chip_erase=True, verify=True, reset=False)
 
-        # Reset the target.
-        target.reset()
+        # Reset and halt.
+        target.reset_and_halt()
+        target.resume()
 
         # Find the RTT control block.
         memory_map: MemoryMap = target.get_memory_map()
@@ -111,10 +112,10 @@ def main():
         LOG.info(f"_SEGGER_RTT @ {rtt_cb_addr:#08x} with {rtt_cb.MaxNumUpBuffers} aUp and {rtt_cb.MaxNumDownBuffers} aDown")
 
         test_result : Sequence[int] = []
-        end_word : str = "STOP.\n"
+        end_word : str = "# STOP.\n"
         end_word_bytes : Sequence[int] = [ord(c) for c in end_word]
 
-        while test_result[-6:] != end_word_bytes:
+        while test_result[-8:] != end_word_bytes:
             # read data from up buffers (target -> host)    
             data = target.read_memory_block8(up_addr, sizeof(SEGGER_RTT_BUFFER_UP))
             up = SEGGER_RTT_BUFFER_UP.from_buffer(bytearray(data))

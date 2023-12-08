@@ -56,9 +56,11 @@ platform_source += files(
         'Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_spi_ex.c',
         'Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart.c',
         'Drivers/STM32H7xx_HAL_Driver/Src/stm32h7xx_hal_uart_ex.c',
-        'Core/Src/ST7789.c',
+#        'Core/Src/ST7789.c',
         'Core/Src/graphics.c',
         'Core/Src/i2c_abstraction.c',
+        'Core/Src/spi_abstraction.c',
+        'Core/Src/gpio_abstraction.c',
         'Core/Src/i2c_detect.c',
    ]
 )
@@ -80,12 +82,18 @@ platform_include += include_directories(
 unittest_platform_source     += files(
     [
         # Add all the source files here, that are needed to run the unittests on the target
+        'Segger_RTT/RTT/SEGGER_RTT.c',
+        'Segger_RTT/RTT/SEGGER_RTT_printf.c',
+        'Segger_RTT/RTT/SEGGER_RTT_ASM_ARMv7M.S',
+        'Segger_RTT/Syscalls/SEGGER_RTT_Syscalls_GCC.c',
     ]
 )
 
 unittest_platform_include    += include_directories(
     [
         # Add all the include directories specific for running unittests on target here
+        'Segger_RTT/RTT',
+        'Segger_RTT/Config'
     ]
 )
 

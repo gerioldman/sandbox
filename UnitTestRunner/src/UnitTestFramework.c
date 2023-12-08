@@ -61,4 +61,5 @@ void RunAllTests(void)
     }
 
     TAP_plan(i);
+    printf("# STOP.\n");
 }

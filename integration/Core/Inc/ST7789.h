@@ -4,11 +4,11 @@
  *  Created on: Jan 14, 2022
  *      Author: kgerg
  */
-#pragma once
 #ifndef SRC_ST7789_H_
 #define SRC_ST7789_H_
 
 #include "main.h"
+#include <stdint.h>
 //#define ST7789_CS_Pin GPIO_PIN_4
 //#define ST7789_CS_GPIO_Port GPIOA
 //#define ST7789_DC_Pin GPIO_PIN_14

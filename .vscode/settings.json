@@ -1,6 +1,6 @@
 {
     "codechecker.backend.compilationDatabasePath": "${workspaceFolder}\\builddir\\compile_commands.json",
-    "C_Cpp.default.compileCommands": "builddir\\vscode_compile_commands.json",
+    "C_Cpp.default.compileCommands": "h:\\Egyetem\\Msc\\sandbox\\builddir/compile_commands.json",
     "files.associations": {
         "st7789.h": "c",
         "stm32h7xx_hal.h": "c",
@@ -18,7 +18,14 @@
         "i2c_abstraction.h": "c",
         "complementary_filter.c_mock.h": "c",
         "complementary_filter.c_mock_internal.h": "c",
-        "complementary_filter.h": "c"
+        "complementary_filter.h": "c",
+        "math.h": "c",
+        "spi_abstraction.h": "c",
+        "gpio_abstraction.h": "c",
+        "memmap.h": "c",
+        "st7789_driver.h": "c",
+        "tim.h": "c"
     },
-    "mesonbuild.configureOnOpen": false
+    "cortex-debug.variableUseNaturalFormat": false,
+    "mesonbuild.buildFolder": "builddir"
 }

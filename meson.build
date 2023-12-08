@@ -2,7 +2,7 @@
 project(
     'Noice',
     ['c'],
-    version: '0.1.0',
+    version: '1.0.0',
     license: 'MIT',
     meson_version: '>= 1.0.0',
     default_options:[
@@ -73,7 +73,7 @@ codechecker = find_program('CodeChecker')
 
 run_target(
     'static_analysis',
-    command: [codechecker, 'analyze', 'compile_commands.json' , '-o', '..\\.codechecker','--skip','..\\codechecker.cfg']
+    command: [codechecker, 'analyze', 'compile_commands.json' , '-o', '..\\.codechecker']
 )
 
 if get_option('target_executable') == true
@@ -114,7 +114,7 @@ custom_target(
     build_by_default: true
 )
 
-custom_target(
+hex_file = custom_target(
     'hex',
     output: meson.project_name() + '.hex',
     command: [objcopy ,'-O', 'ihex', meson.project_name() + '.elf', meson.project_name() + '.hex'],
@@ -131,7 +131,7 @@ custom_target(
 # I recommend putting custom commands in the integration meson.build file
 run_target(
     'flash',
-    command: [python, flash_script ,meson.project_name() + '.hex'],
+    command: [python, flash_script ,hex_file],
     depends: ELF
 )
 

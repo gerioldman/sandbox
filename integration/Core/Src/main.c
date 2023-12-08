@@ -53,14 +53,13 @@
 
 /* USER CODE BEGIN PV */
 
-MAP_TO_RAM_D1_BSS uint8_t display_buffer0[115200];
-MAP_TO_RAM_D2_BSS uint8_t display_buffer1[115200];
-
 uint8_t *display = display_buffer0;
 uint8_t *display_next = display_buffer1;
 _ST7789_Refresh_State ST7789_Refresh_State;
 
 extern DMA_HandleTypeDef hdma_spi1_tx;
+
+uint32_t runtimeStatCount = 0;
 
 /* USER CODE END PV */
 
@@ -110,29 +109,9 @@ int main(void)
   MX_TIM17_Init();
   MX_I2C4_Init();
   /* USER CODE BEGIN 2 */
-  ST7789_Init();
-
-  /*for (uint32_t var = 0; var < 14399; var++) {
-   display1[2*var] = picture[var]>> 8;
-   display1[2*var+1] =  picture[var];
-   }
-   for (uint32_t var = 0; var < 14399; var++) {
-   display2[2*var] = picture[var+14400]>> 8;
-   display2[2*var+1] = picture[var+14400];
-   }
-   for (uint32_t var = 0; var < 14399; var++) {
-   display3[2*var] =  picture[var+28800] >> 8;
-   display3[2*var+1] =  picture[var+28800];
-   }
-   for (uint32_t var = 0; var < 14399; var++) {
-   display4[2*var] =  picture[var+43200] >> 8;
-   display4[2*var+1] =  picture[var+43200];
-   }*/
-  // int k = 0;
   Graphics_Init();
-  Graphics_Draw();
-  ST7789_SwitchBuffer();
-  // HAL_TIM_Base_Start_IT(&htim17);
+  //Graphics_Draw();
+  //ST7789_SwitchBuffer();
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -150,30 +129,6 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-
-    // HAL_Delay(40);
-    /*uint8_t *temp;
-    temp = display_next;
-    display_next = display;
-    display = temp;
-    ST7789_Refresh_Display(&hdma_spi1_tx);
-    static int k = 0;
-
-    for (int i = 0; i < 115200; i += 2) {
-      if ((i / 2) % 240 == k) {
-        display_next[i] = 0xFF;
-        display_next[i + 1] = 0xFF;
-      } else {
-        display_next[i] = 0x00;
-        display_next[i + 1] = 0x00;
-      }
-    }
-
-    if (k == 239)
-      k = 0;
-    else
-      k++;
-    while(ST7789_Refresh_State != ST7789_DMA_Ready){continue;}*/
   }
   /* USER CODE END 3 */
 }
@@ -236,7 +191,7 @@ void SystemClock_Config(void)
   RCC_ClkInitStruct.AHBCLKDivider = RCC_HCLK_DIV2;
   RCC_ClkInitStruct.APB3CLKDivider = RCC_APB3_DIV2;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_APB1_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV16;
+  RCC_ClkInitStruct.APB2CLKDivider = RCC_APB2_DIV2;
   RCC_ClkInitStruct.APB4CLKDivider = RCC_APB4_DIV2;
 
   if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_4) != HAL_OK)
@@ -266,7 +221,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-
+  if (htim->Instance == TIM17) {
+    runtimeStatCount++;
+  }
   /* USER CODE END Callback 1 */
 }
 

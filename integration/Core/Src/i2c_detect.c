@@ -51,6 +51,7 @@ void i2c_detect(void)
  */
 int _write(int file, char *data, int len)
 {
+  (void) file;
   for (uint16_t i = 0u; i < len; i++)
   {
     ITM_SendChar(data[i]);

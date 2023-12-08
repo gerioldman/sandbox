@@ -147,9 +147,7 @@ void TAP_YAMLDiagnostic(const char *file, unsigned int line, const char *message
 
     // Print the file and line
     TAP_indent();
-    printf("  file: %s\n", file);
-    TAP_indent();
-    printf("  line: %u\n", line);
+    printf("  file: %s:%u\n", file,line);
 
     if (message != ((void *)0))
     {
@@ -159,11 +157,15 @@ void TAP_YAMLDiagnostic(const char *file, unsigned int line, const char *message
         while (message[index] != '\0')
         {
             TAP_indent();
+            // Add two spaces to the beginning of the line for correct indentation
+            printf("  ");
+            // Print the message until the end of the line or until the end of the message
             while (message[index] != '\0' && message[index] != '\n')
             {
                 printf("%c", message[index]);
                 index++;
             }
+            // Print the newline character
             printf("\n");
             if (message[index] != '\0')
                 index++;
